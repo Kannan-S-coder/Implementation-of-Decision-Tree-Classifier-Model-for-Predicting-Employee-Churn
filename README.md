@@ -8,22 +8,55 @@ To write a program to implement the Decision Tree Classifier Model for Predictin
 2. Anaconda – Python 3.7 Installation / Jupyter notebook
 
 ## Algorithm
-1. 
-2. 
-3. 
-4. 
+1. Start the program
+2. attach the given data file
+3. now find the satisfaction level of employee data
+4. find the accuracy and new predict value
+5. end the program
 
 ## Program:
 ```
-/*
 Program to implement the Decision Tree Classifier Model for Predicting Employee Churn.
-Developed by: 
-RegisterNumber:  
-*/
+Developed by: Kannan.S
+RegisterNumber: 212223230098
 ```
 
+```py
+import pandas as pd
+data=pd.read_csv(r"C:\Users\admin\Downloads\Employee.csv")
+data.head()
+data.info()
+data.isnull().sum()
+data["left"].value_counts()
+from sklearn.preprocessing import LabelEncoder
+le=LabelEncoder()
+data["salary"]=le.fit_transform(data["salary"])
+data.head()
+x=data[["satisfaction_level","last_evaluation","number_project","average_montly_hours",
+"time_spend_company","Work_accident","promotion_last_5years","salary"]]
+x.head()
+y=data["left"]
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=100)
+from sklearn.tree import DecisionTreeClassifier
+dt=DecisionTreeClassifier(criterion="entropy")
+dt.fit(x_train,y_train)
+y_pred=dt.predict(x_test)
+from sklearn import metrics
+accuracy=metrics.accuracy_score(y_test,y_pred)
+accuracy
+dt.predict([[0.5,0.8,9,260,6,0,1,2]])
+
+```
+
+
 ## Output:
-![decision tree classifier model](sam.png)
+![image](https://github.com/user-attachments/assets/5b7ee349-482d-4901-bb4c-0a6362be26ef)
+## Accuracy
+![image](https://github.com/user-attachments/assets/2da9e6b4-0c3b-4281-8505-b2713b40e8f7)
+## New Predicted
+![image](https://github.com/user-attachments/assets/2e91d331-50bc-4746-afdb-ca26bdc05066)
+
 
 
 ## Result:
